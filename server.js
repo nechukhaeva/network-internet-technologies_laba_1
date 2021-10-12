@@ -19,16 +19,6 @@ router.get('/users', (req, res) => {
     }
 })
 
-router.get('/user', (req, res) => {
-    console.log('get user', req.query.id)
-    const user = db.selectUserById(req.query.id)
-    if (user){
-        res.status(200).send({success: true, msg: 'ok', user})
-    } else {
-        res.status(200).send({success: false, msg: 'no user found'})
-    }
-})
-
 router.post('/user', (req, res) => {
     console.log('user create', req.body)
     const user = db.insertUser(req.body)
@@ -36,6 +26,16 @@ router.post('/user', (req, res) => {
         res.status(200).send({success: true, msg: 'ok', user})
     } else {
         res.status(200).send({success: false, msg: 'no user added'})
+    }
+})
+
+router.get('/user', (req, res) => {
+    console.log('get user', req.query.login)
+    const user = db.selectUserByLogin(req.query.login)
+    if (user){
+        res.status(200).send({success: true, msg: 'ok', user})
+    } else {
+        res.status(200).send({success: false, msg: 'no user found'})
     }
 })
 
@@ -96,5 +96,5 @@ let port = 3000
 let hostname = "0.0.0.0"
 
 app.listen(port, hostname, function () {
-    console.log('start api', `${port}`)
+    console.log('start api', `${port}НФТ`)
 })

@@ -14,9 +14,9 @@ class Db {
 
         sql = `CREATE TABLE IF NOT EXISTS users (
             id integer PRIMARY KEY,
-            fullName text,
-			phoneNumber text,
-            email text
+            login text,
+            email text, 
+            password text
 		)`
         this.db.prepare(sql).run()
 
@@ -39,6 +39,10 @@ class Db {
         return this.db.prepare(`SELECT * FROM users WHERE id = ?`).get(id)
     }
 
+    selectUserByLogin(login){
+        return this.db.prepare(`SELECT * FROM users WHERE login = ?`).get(login)
+    }
+
     selectTodoListByUser(id){
         return this.db.prepare(`SELECT * FROM todoList WHERE idUser = ?`).all(id)
     }
@@ -48,8 +52,8 @@ class Db {
     }
 
     insertUser(user){
-        if (user.fullName != null) {
-            const stmt = this.db.prepare('INSERT INTO users (fullName, phoneNumber, email) VALUES (?,?,?)').run(user.fullName, user.phoneNumber, user.email)
+        if (user.login != null && user.password != null) {
+            const stmt = this.db.prepare('INSERT INTO users (login, email, password) VALUES (?,?,?)').run(user.login, user.email, user.password)
             if (stmt.changes) {
                 user.id = stmt.lastInsertRowid
                 return user
