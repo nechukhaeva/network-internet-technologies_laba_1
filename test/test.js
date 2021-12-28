@@ -60,6 +60,7 @@ describe('/POST user', () => {
   });
 });
 
+
 describe('/GET user', () => {
   it('it should GET the user by login', (done) => {
     chai.request(server)
