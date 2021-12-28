@@ -3,7 +3,7 @@
 const express = require('express')
 const DB = require('./db')
 
-const db = new DB('user.sqlite')
+const db = new DB("user.sqlite")
 const app = express()
 const router = express.Router()
 
@@ -96,5 +96,7 @@ let port = 3000
 let hostname = "0.0.0.0"
 
 app.listen(port, hostname, function () {
-    console.log('start api', `${port}НФТ`)
+    console.log('start api', `${port}`)
 })
+
+module.exports = app
